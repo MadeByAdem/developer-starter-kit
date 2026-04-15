@@ -47,6 +47,41 @@ Reusable code templates in `.claude/boilerplates/` — used by the `project-star
 
 **Frontend:** Vue 3 app entry point, API client (Axios for Vue, `$fetch` for Nuxt), example service, Pinia store template, and `useLoading` composable.
 
+### 🎨 UI/UX Pro Max Skill Bundle
+
+Design intelligence built in at `.claude/skills/` — activates automatically whenever you do UI/UX work. Vendored from [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) (MIT).
+
+| Skill | What it does |
+| ----- | ------------ |
+| `ui-ux-pro-max` | Main design intelligence: 67 UI styles, 161 color palettes, 57 font pairings, 99 UX guidelines, 25 chart types across 15+ stacks |
+| `design-system` | Generate a complete, tailored design system (MASTER.md + per-page overrides) |
+| `ui-styling` | Font rendering + style previews (Tailwind + shadcn/ui helpers, Canvas fonts) |
+| `design` / `brand` / `banner-design` / `slides` | Specialized visual-design helpers (logos, icons, banners, presentations) |
+
+Quick start inside any project that has this bundle:
+
+```bash
+python3 .claude/skills/ui-ux-pro-max/scripts/search.py "saas dashboard modern" --design-system -p "My Project"
+```
+
+See `.claude/skills/README.md` for the full list and how to update.
+
+**Alternative: install from upstream** (skip the vendored copy and always get the latest version):
+
+```bash
+# Option 1 — Inside Claude Code via marketplace
+/plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill
+/plugin install ui-ux-pro-max@ui-ux-pro-max-skill
+
+# Option 2 — Via the official CLI (recommended by the skill author)
+npm install -g uipro-cli
+cd /path/to/your/project
+uipro init --ai claude           # per-project
+uipro init --ai claude --global  # or install globally for all projects
+```
+
+The vendored copy in `.claude/skills/` gives you a pinned, offline-ready version. The CLI / marketplace install gives you the newest templates. Pick whichever fits your workflow — do not run both (they write to the same folder).
+
 ### 📚 8 Guides
 
 | Guide                                                  | For when you need to...                                       |
@@ -66,16 +101,17 @@ Reusable code templates in `.claude/boilerplates/` — used by the `project-star
 
 ### Option A: Global setup
 
-Install agents, boilerplates, and references once — use them in every project.
+Install agents, boilerplates, references, and skills once — use them in every project.
 
 **Mac/Linux:**
 
 ```bash
-# One-time setup: copy agents, boilerplates, and references globally
-mkdir -p ~/.claude/agents ~/.claude/boilerplates ~/.claude/references
+# One-time setup: copy agents, boilerplates, references, and skills globally
+mkdir -p ~/.claude/agents ~/.claude/boilerplates ~/.claude/references ~/.claude/skills
 cp .claude/agents/*.md ~/.claude/agents/
 cp -r .claude/boilerplates/* ~/.claude/boilerplates/
 cp .claude/references/* ~/.claude/references/
+cp -r .claude/skills/* ~/.claude/skills/
 
 # For each new project:
 mkdir my-project && cd my-project
@@ -85,18 +121,22 @@ cp /path/to/developer-starter-kit/CLAUDE.md .
 **Windows (PowerShell):**
 
 ```powershell
-# One-time setup: copy agents, boilerplates, and references globally
+# One-time setup: copy agents, boilerplates, references, and skills globally
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\agents"
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\boilerplates"
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\references"
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\skills"
 Copy-Item .claude\agents\*.md "$env:USERPROFILE\.claude\agents\"
 Copy-Item -Recurse .claude\boilerplates\* "$env:USERPROFILE\.claude\boilerplates\"
 Copy-Item .claude\references\* "$env:USERPROFILE\.claude\references\"
+Copy-Item -Recurse .claude\skills\* "$env:USERPROFILE\.claude\skills\"
 
 # For each new project:
 mkdir my-project; cd my-project
 Copy-Item \path\to\developer-starter-kit\CLAUDE.md .
 ```
+
+> **Note:** Globally installed skills are available across all projects. Scripts like `~/.claude/skills/ui-ux-pro-max/scripts/search.py` can be called from anywhere.
 
 Then open Claude Code and describe what you want to build.
 
@@ -120,7 +160,19 @@ Copy-Item \path\to\developer-starter-kit\CLAUDE.md .
 Copy-Item -Recurse \path\to\developer-starter-kit\.claude .
 ```
 
+> The `.claude/` folder contains agents, boilerplates, references, **and** the UI/UX Pro Max skill bundle — all copied in one go.
+
 Then open Claude Code and describe what you want to build.
+
+### Optional: Skill scripts have Python dependencies
+
+The `ui-styling` skill uses Python scripts for font/Tailwind previews. If you plan to run them, install the requirements once:
+
+```bash
+pip install -r .claude/skills/ui-styling/scripts/requirements.txt
+```
+
+The main `ui-ux-pro-max` search script uses only the Python 3 standard library — no extra install needed.
 
 ---
 
