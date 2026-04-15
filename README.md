@@ -66,6 +66,22 @@ python3 .claude/skills/ui-ux-pro-max/scripts/search.py "saas dashboard modern" -
 
 See `.claude/skills/README.md` for the full list and how to update.
 
+**Alternative: install from upstream** (skip the vendored copy and always get the latest version):
+
+```bash
+# Option 1 — Inside Claude Code via marketplace
+/plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill
+/plugin install ui-ux-pro-max@ui-ux-pro-max-skill
+
+# Option 2 — Via the official CLI (recommended by the skill author)
+npm install -g uipro-cli
+cd /path/to/your/project
+uipro init --ai claude           # per-project
+uipro init --ai claude --global  # or install globally for all projects
+```
+
+The vendored copy in `.claude/skills/` gives you a pinned, offline-ready version. The CLI / marketplace install gives you the newest templates. Pick whichever fits your workflow — do not run both (they write to the same folder).
+
 ### 📚 8 Guides
 
 | Guide                                                  | For when you need to...                                       |
