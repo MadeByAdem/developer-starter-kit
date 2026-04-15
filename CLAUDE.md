@@ -254,6 +254,21 @@ Detailed agent workflows, decision trees, and the full agent reference table are
 
 ---
 
+## Available Skills
+
+This kit includes Claude Code skills in `.claude/skills/`. Invoke them whenever the task matches their purpose — do not reinvent what a skill already does.
+
+| Skill | Use when |
+|-------|----------|
+| `ui-ux-pro-max` | ANY UI/UX work: designing pages, picking colors/fonts/spacing, building or reviewing components, choosing a visual style. Start with `python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<query>" --design-system` for tailored recommendations. |
+| `design-system` | Generating a project-wide design system (MASTER.md + per-page overrides). |
+| `ui-styling` | Font rendering and style previews. |
+| `design`, `brand`, `banner-design`, `slides` | Specialized visual/design tasks. |
+
+See `.claude/skills/README.md` for the full list and upstream source.
+
+---
+
 ## Context Management
 
 - **Start a fresh conversation** after large features, topic switches, or long debugging sessions
